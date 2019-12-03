@@ -29,18 +29,16 @@ $user='root';      //数据库连接用户名
 $pass='';          //对应的密码
 $dsn="$dbms:host=$host;dbname=$dbName";
 
-echo "111";//
 try 
 {
     $dbh = new PDO($dsn, $user, $pass); 
-    if(!empty($_post))
+    if(!empty($_POST))
     {
-        echo "111";
         $field = array('username','password','email');
         $value = array();
         foreach ($field as $k => $v) 
         {
-            $data=isset($_post[$v]) ? $_post[$v] : '';
+            $data=isset($_POST[$v]) ? $_POST[$v] : '';
             if ($data=='') {
                 die($v.'字段不能为空');
             }
@@ -49,8 +47,8 @@ try
         }
         $field=implode(',', $field);
         $value=implode(',', $value);
-        $sql="insert into user ($field) values ($values)";
-        if ($res=$PDO->query($sql)) {
+        $sql="insert into user ($field) values ($value)";
+        if ($res=$dbh->query($sql)) {
             echo '<script>alert("注册成功");
             window.location.href="login.php";</script>';
         }

@@ -33,11 +33,15 @@ $dsn="$dbms:host=$host;dbname=$dbName";
 try 
 {
     $dbh = new PDO($dsn, $user, $pass); 
-    if (!empty(($_post))) {
-    	$username=isset($_post['username']) ? trim($_POST['username']) : '';
-    	$password=isset($_post['password']) ? ($_post['password']) : '';
-    	$sql="select `id`,`password` from `user` where `username`='$username'";
-    	if($res=$pdo->query($sql))
+    if (!empty(($_POST))) {
+    	$username=isset($_POST['username']) ? trim($_POST['username']) : '';
+    	$password=isset($_POST['password']) ? ($_POST['password']) : '';
+    	$sql="select id,password from user where username='$username' and password='$password';";
+    	//echo $sql;
+    	$temp=$dbh->query($sql);
+    	$res=$temp->fetch();
+    	//die('('.$res.')');
+    	if($res)
     	{
     		echo'<script>alert("登录成功");window.location.href="index.php";</script>';
     	}
