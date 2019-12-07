@@ -40,7 +40,7 @@ try
     	//echo $sql;
     	$temp=$dbh->query($sql);
     	$res=$temp->fetch();
-    	//die('('.$res.')');
+    	//die('('.$res.')'); 
     	if($res)
     	{
     		echo'<script>alert("登录成功");window.location.href="index.php";</script>';
